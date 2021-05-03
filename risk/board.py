@@ -111,7 +111,22 @@ class Board(object):
         Returns:
             bool: True if the input path is valid
         '''
+        if len(path) == 0 or len(path) == 1:
+            return True
+        if Board._unique_only(path) == False:
+            return False
+        for i in range(len(path)-1):
+            if path[i+1] not in risk.definitions.territory_neighbors[path[i]]:
+                return False
+        return True
 
+    @staticmethod
+    def _unique_only(path):
+        for i in range(len(path)):
+            for j in range(len(path)):
+                if path[i] == path[j] and i != j:
+                    return False
+        return True
     
     def is_valid_attack_path(self, path):
         '''
@@ -130,6 +145,7 @@ class Board(object):
         Returns:
             bool: True if the path is an attack path
         '''
+
 
 
     def cost_of_attack_path(self, path):
