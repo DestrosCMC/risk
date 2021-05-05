@@ -118,18 +118,18 @@ class Board(object):
         '''
         if len(path) == 0 or len(path) ==1:
             return True
-        if Board._no_repeats(path) == False:
+        if Board._unique_only(path) == False:
             return False
-        for i in range(len(path)-1):
-            if path[i+1] not in risk.definitions.territory_neighbors[path[i]]:
+        for i in range(len(path) - 1):
+            if path[i + 1] not in risk.definitions.territory_neighbors[path[i]]:
                 return False
         return True
 
     @staticmethod
-    def _no_repeats(path):
+    def _unique_only(path):
         for i in range(len(path)):
-            for e in range(len(path)):
-                if path[i] == path[e] and i != e:
+            for j in range(len(path)):
+                if path[i] == path[j] and i != j:
                     return False
         return True
 
